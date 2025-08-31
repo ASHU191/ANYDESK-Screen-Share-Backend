@@ -1,0 +1,40 @@
+{
+  "name": "remote-desktop-agent",
+  "version": "1.0.0",
+  "description": "Desktop agent for remote control",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron .",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux"
+  },
+  "dependencies": {
+    "electron": "^27.0.0",
+    "socket.io-client": "^4.7.0",
+    "robotjs": "^0.6.0",
+    "screenshot-desktop": "^1.12.7",
+    "node-datachannel": "^0.7.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.6.0"
+  },
+  "build": {
+    "appId": "com.remotedesktop.agent",
+    "productName": "Remote Desktop Agent",
+    "directories": {
+      "output": "dist"
+    },
+    "files": ["**/*", "!node_modules/**/*"],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RemoteDesk Agent</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="logo">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <h1>RemoteDesk Agent</h1>
+            </div>
+            <div class="status" id="connectionStatus">
+                <span class="status-dot offline"></span>
+                <span class="status-text">Offline</span>
+            </div>
+        </header>
+
+        <main class="main">
+             Connection Setup 
+            <section class="section" id="connectionSection">
+                <h2>Server Connection</h2>
+                <div class="form-group">
+                    <label for="serverUrl">Server URL</label>
+                    <input type="text" id="serverUrl" value="http://localhost:5000" placeholder="http://localhost:5000">
+                </div>
+                <div class="form-group">
+                    <label for="authToken">Authentication Token</label>
+                    <input type="password" id="authToken" placeholder="Enter your JWT token">
+                </div>
+                <button id="connectBtn" class="btn btn-primary">Connect to Server</button>
+            </section>
+
+             Connection Code 
+            <section class="section" id="codeSection" style="display: none;">
+                <h2>Share Connection Code</h2>
+                <div class="connection-code">
+                    <div class="code-display" id="connectionCode">------</div>
+                    <button id="generateCodeBtn" class="btn btn-secondary">Generate New Code</button>
+                </div>
+                <p class="help-text">Share this code with someone to allow them to connect to your computer.</p>
+            </section>
+
+             Screen Sharing 
+            <section class="section" id="screenSection" style="display: none;">
+                <h2>Screen Sharing</h2>
+                <div class="screen-sources" id="screenSources">
+                     Screen sources will be populated here 
+                </div>
+                <div class="screen-controls">
+                    <button id="refreshSourcesBtn" class="btn btn-secondary">Refresh Sources</button>
+                    <button id="startSharingBtn" class="btn btn-primary" disabled>Start Sharing</button>
+                    <button id="stopSharingBtn" class="btn btn-danger" style="display: none;">Stop Sharing</button>
+                </div>
+            </section>
+
+             Remote Control 
+            <section class="section" id="controlSection" style="display: none;">
+                <h2>Remote Control</h2>
+                <div class="control-status">
+                    <div class="control-indicator" id="controlIndicator">
+                        <span class="indicator-dot disabled"></span>
+                        <span class="indicator-text">Remote control disabled</span>
+                    </div>
+                    <button id="toggleControlBtn" class="btn btn-secondary">Enable Remote Control</button>
+                </div>
+                <p class="help-text">When enabled, the remote user can control your mouse and keyboard.</p>
+            </section>
+
+             Active Session 
+            <section class="section" id="sessionSection" style="display: none;">
+                <h2>Active Session</h2>
+                <div class="session-info">
+                    <div class="session-detail">
+                        <span class="label">Connected User:</span>
+                        <span class="value" id="connectedUser">-</span>
+                    </div>
+                    <div class="session-detail">
+                        <span class="label">Session Duration:</span>
+                        <span class="value" id="sessionDuration">00:00:00</span>
+                    </div>
+                </div>
+                <button id="endSessionBtn" class="btn btn-danger">End Session</button>
+            </section>
+        </main>
+
+         Connection Request Modal 
+        <div class="modal" id="connectionModal" style="display: none;">
+            <div class="modal-content">
+                <h3>Incoming Connection Request</h3>
+                <p>User <strong id="requestingUser"></strong> wants to connect to your computer.</p>
+                <div class="modal-actions">
+                    <button id="acceptRequestBtn" class="btn btn-primary">Accept</button>
+                    <button id="rejectRequestBtn" class="btn btn-secondary">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
